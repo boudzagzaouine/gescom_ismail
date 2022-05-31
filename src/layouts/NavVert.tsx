@@ -21,6 +21,8 @@ import {
   TYPE_MANAGER,
   VILLE_MANAGER,
   USER_MANAGER,
+  TABLE_MANAGER,
+  FACTURATION_MANAGER,
 } from "tools/consts";
 import Icon from "widgets/Icon";
 type NavVertProps = {
@@ -75,14 +77,15 @@ console.log("route = "+JSON.stringify(route))
       active: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
       sous: [],
     },
-    /* {
-      id: 11,
-      icon: "home",
-      text: "test",
-      link: "/Test",
-      active: route.pathname == "/Test",
+     {
+      id: FACTURATION_MANAGER,
+      icon: "vente",
+      text: "vente et facturation",
+      link: "/manager/ventefacturation/Facturation",
+       active: route.pathname == "/manager/ventefacturation/Facturation",
       sous: []
     },
+       /*
     {
       id: 12,
       icon: "home",
@@ -92,7 +95,7 @@ console.log("route = "+JSON.stringify(route))
       sous: []
     }, */
     {
-      id: 13,
+      id: TABLE_MANAGER,
       icon: "table",
       text: "Gestion des Tables",
       link: "/reference/unitMeasure/NewUnitMeasure",

@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { OpenPaysProp } from "components/reference2/OpenPays";
 import { PAGE_SIZE } from "tools/consts";
 import { Pays } from "tools/types";
 
@@ -97,6 +96,15 @@ export const {
   useArchivePaysMutation,
   useRestorePaysMutation,
 } = crudPays;
+export type PaysJson = {
+  content: Pays[];
+};
+export type OpenPaysProp = {
+  data: PaysJson;
+  refetch: () => void;
+  save: () => void;
+  edit: () => void;
+};
 export const openPays = (): OpenPaysProp => {
   const { data = [], refetch } = useFetchPaysQuery();
   const [save] = useAddPaysMutation();

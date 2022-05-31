@@ -1,9 +1,6 @@
 import { TrashIcon } from "@heroicons/react/outline";
 import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
+  ArchiveIcon, PencilAltIcon
 } from "@heroicons/react/solid";
 import ArchivePays from "components/reference2/ArchivePays";
 import DeletePays from "components/reference2/DeletePays";
@@ -16,7 +13,6 @@ import { p0, Pays, PaysJson } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import { Button } from "widgets/Button";
 import Icon from "widgets/Icon";
-import Mitems from "widgets/Mitems";
 import Mitems0 from "widgets/Mitems0";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";

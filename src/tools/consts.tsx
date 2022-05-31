@@ -9,13 +9,19 @@ export const REQUEST_DELETE = 6;
 export const PAGE_SIZE = 30000;
 
 export const PAYMENT_CHOICE = [" ", "CHECK", "ESPECE", "CARTE"];
-export const ICOTERM = [" ", "CTP", "CIP", "DAP", "DDP"];
+export const INCOTERM = [" ", "CTP", "CIP", "DAP", "DDP"];
+export const CLIENT = [" ", "ISMAIL", "IMANE", "ILIAS", "JON"];
+export const MODEREGELEMENT = [" ", "LIC", "VIREMENT"];
 export const DEVISE = [" ", "MAD", "EUR", "DLR", "YEN"];
 
 export const HOME = 7;
 export const CLIENT_MANAGER = 8;
 export const VENDOR_MANAGER = 9;
 export const PURCHASE_MANAGER = 10;
+export const FACTURATION_MANAGER = 11
+export const TABLE_MANAGER = 12
+
+
 export const DECIMAL = [" ", "0.0", "0.00", "0.000", "0.0000"];
 export const VILLE = [" ", "Fes", "El Jadida", "Casa", "Rabat"];
 export const FAMILLE = [

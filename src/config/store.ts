@@ -1,3 +1,4 @@
+import { crudFacture } from './rtk/rtkFacture';
 import { crudUser } from "./rtk/RtkUser";
 import { crudVille } from "./rtk/rtkVille";
 import { crudType } from "./rtk/rtkType";
@@ -71,6 +72,7 @@ export function makeStore() {
     [crudType.reducerPath]: crudType.reducer,
     [crudTransporteur.reducerPath]: crudTransporteur.reducer,
     [crudRole.reducerPath]: crudRole.reducer,
+    [crudFacture.reducerPath]: crudFacture.reducer,
     [crudPays.reducerPath]: crudPays.reducer,
     [crudDocument.reducerPath]: crudDocument.reducer,
     [crudDevise.reducerPath]: crudDevise.reducer,
@@ -110,7 +112,8 @@ export function makeStore() {
         .concat([crudPays.middleware, offlineMiddleware])
         .concat([crudDocument.middleware, offlineMiddleware])
         .concat([crudDevise.middleware, offlineMiddleware])
-        .concat([crudCommande.middleware, offlineMiddleware])
+        .concat([crudDevise.middleware, offlineMiddleware])
+        .concat([crudFacture.middleware, offlineMiddleware])
         .concat([crudBureauDouane.middleware, offlineMiddleware])
         .concat([crudArticle.middleware, offlineMiddleware])
         .concat([crudRegimeDouanier.middleware, offlineMiddleware])

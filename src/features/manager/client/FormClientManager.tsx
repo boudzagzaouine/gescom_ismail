@@ -1,37 +1,24 @@
-import React, { useState } from "react";
 import {
   useAddClientMutation,
-  useEditClientMutation,
+  useEditClientMutation
 } from "config/rtk/RtkClient";
-import {
-  DEVISE,
-  ICOTERM,
-  PAYMENT_CHOICE,
-  REQUEST_EDIT,
-  REQUEST_SAVE,
-} from "tools/consts";
-import { STYLE_ICON } from "tools/constStyle";
-import { Client, Devise, Incoterm, PayementMode,payementMode0,incoterm0, devise0 } from "tools/types";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
-import Section from "widgets/Section";
-import { Field, Form } from "widgets";
-import Avatar from "widgets/Avatar";
-import {
-  PencilAltIcon,
-  SaveIcon,
-  UserAddIcon,
-  XCircleIcon,
-} from "@heroicons/react/solid";
-import ListCommandeClient from "./ListCommandeClient";
-import Bsave from "widgets/Bsave";
-import Bcancel from "widgets/Bcancel";
-import Bupdate from "widgets/Bupdate";
-import Xclose from "widgets/Xclose";
 import { openDevises } from "config/rtk/rtkDevise";
 import { openIncoterms } from "config/rtk/rtkIncoterm";
 import { openPayementModes } from "config/rtk/rtkPayementMode";
-import { OpenIncotermProp } from "features/reference/Incoterm/Methods/openIncoterms";
+import React, { useState } from "react";
+import {
+  REQUEST_EDIT,
+  REQUEST_SAVE
+} from "tools/consts";
+import { Client, Devise, devise0, Incoterm, incoterm0, PayementMode, payementMode0 } from "tools/types";
+import { Field, Form } from "widgets";
+import Avatar from "widgets/Avatar";
+import Bcancel from "widgets/Bcancel";
+import Bsave from "widgets/Bsave";
+import Bupdate from "widgets/Bupdate";
+import Section from "widgets/Section";
+import Xclose from "widgets/Xclose";
+import ListCommandeClient from "./ListCommandeClient";
 type FormClientManagerProp = {
   closed: () => void;
   client: Client;

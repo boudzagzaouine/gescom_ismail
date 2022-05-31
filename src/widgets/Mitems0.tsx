@@ -1,11 +1,8 @@
-import React from "react";
-import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import {
-  DotsVerticalIcon,
-  DuplicateIcon,
-  TrashIcon,
+  DotsVerticalIcon
 } from "@heroicons/react/solid";
+import React, { Fragment } from "react";
 import { MenuItems } from "widgets/TypeWidgets";
 
 function classNames(...classes: any[]) {

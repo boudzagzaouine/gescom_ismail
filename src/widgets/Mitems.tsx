@@ -1,17 +1,11 @@
-import React from "react";
-import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import {
-  DotsVerticalIcon,
-  DuplicateIcon,
   ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
+  ClipboardListIcon, DotsVerticalIcon, PencilAltIcon, TrashIcon
 } from "@heroicons/react/solid";
-
+import React, { Fragment } from "react";
 import { MenuItems } from "widgets/TypeWidgets";
+
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");

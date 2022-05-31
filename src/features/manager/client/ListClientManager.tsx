@@ -1,29 +1,19 @@
-import {
-  ArchiveIcon,
-  ClipboardListIcon,
-  PencilAltIcon,
-  ReplyIcon,
-  TrashIcon,
-  UserAddIcon,
-} from "@heroicons/react/solid";
 import ArchiveClient from "components/manager/client/ArchiveClient";
 import DeleteClient from "components/manager/client/DeleteClient";
-import Mitems from "widgets/Mitems";
-import Pagin from "widgets/Pagin";
 import RestoreClient from "components/manager/client/RestoreClient";
-
+import { OpenClientProp, openPaginationClients } from "config/rtk/RtkClient";
 import React, { useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { STYLE_ICON } from "tools/constStyle";
 import { c0, Client } from "tools/types";
 import { Button } from "widgets";
 import Bcyan from "widgets/Bcyan";
 import Icon from "widgets/Icon";
+import Mitems from "widgets/Mitems";
+import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
-import { MenuItems } from "widgets/TypeWidgets";
-import FormClientManager from "./FormClientManager";
 import Table from "widgets/Table";
-import { OpenClientProp, openPaginationClients } from "config/rtk/RtkClient";
+import FormClientManager from "./FormClientManager";
+
 const ListClientManager = () => {
   const [form, setForm] = useState(false);
   const [client0, setClient0] = useState(c0);

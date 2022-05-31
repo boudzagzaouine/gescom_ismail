@@ -1,5 +1,3 @@
-import { inRange } from "lodash";
-import { Timestamp } from "rxjs";
 
 export type Num = {
   id: number;
@@ -287,30 +285,24 @@ export const decharge0: Decharge = {
   declarant: "",
 };
 
-export interface TransporteurJson {
-  content:Transporteur[]
-}
+//************************************************************ */
+//************************************************************ */
+//**********************reference 2*************************** */
 export interface Transporteur {
   id: string;
   designation: string;
 }
-export const transporteur0:Transporteur={
-  id:"",
-  designation:""
+export const transporteur0: Transporteur = {
+  id: "",
+  designation: ""
 }
 export interface Document {
   id: string;
   designation: string;
 }
-export const document0:Document={
-  id:"",
-  designation:""
-}
-export interface DocumentJson {
-  content:Document[]
-}
-export interface DeviseJson {
-  content:Devise[]
+export const document0: Document = {
+  id: "",
+  designation: ""
 }
 export interface Devise {
   id: string;
@@ -318,20 +310,17 @@ export interface Devise {
   symbole: string;
   designation: string;
 }
-export const devise0: Devise= {
+export const devise0: Devise = {
   id: "",
   code_iso: "",
   symbole: "",
   designation: "",
 }
-export interface PaysJson {
-  content:Pays[]
-}
 export interface Pays {
   id: string;
   designation: string;
 }
-export const pays0: Pays ={
+export const pays0: Pays = {
   id: "",
   designation: ""
 }
@@ -340,7 +329,7 @@ export interface Role {
   designation: string;
   nbrUtilisateur: string;
 }
-export const role0: Role ={
+export const role0: Role = {
   id: "",
   designation: "",
   nbrUtilisateur: "",
@@ -350,14 +339,11 @@ export interface Ville {
   designation: string;
   pays: Pays;
 }
-export interface VilleJson{
-  content:Ville[]
-}
 export interface Type {
   id: string;
   designation: string;
 }
-export const type0: Type ={
+export const type0: Type = {
   id: "",
   designation: ""
 }
@@ -393,6 +379,97 @@ export const r0: Role = {
   designation: "",
   nbrUtilisateur: "",
 };
+
+//************************************************************ */
+//************************************************************ */
+//**********************vente et facturation *************************** */
+export interface FactureJson {
+  content: Facture[]
+}
+export interface AvoirJson {
+  content: Avoir[]
+}
+export interface ConversionJson {
+  content: Conversion[]
+}
+export interface JournalJson {
+  content: Journal[]
+}
+export interface Facture {
+  id: string
+  NumFacture: number;
+  client: Client[];
+  date: Date
+  numColisage: number
+  Montant: number
+  tva: number
+  total: number
+  payement: string
+}
+export const fa0: Facture = {
+  id: '',
+  NumFacture: 0,
+  client: [],
+  date: new Date(),
+  numColisage: 0,
+  Montant: 0,
+  tva: 0,
+  total: 0,
+  payement: ''
+}
+export interface Avoir {
+  id: string
+  num: number;
+  client: Client[];
+  NumFacture: number;
+  date: Date
+  Montant: number
+}
+export const a0: Avoir = {
+  id: '',
+  NumFacture: 0,
+  client: [],
+  date: new Date(),
+  Montant: 0,
+  num: 0
+}
+export interface Conversion {
+  id: string
+  NumFacture: number;
+  date: Date
+  Montant: number
+  tauxchange: number
+  valeur: number
+  client: Client[];
+}
+export const co0: Conversion = {
+  id: '',
+  NumFacture: 0,
+  client: [],
+  date: new Date(),
+  Montant: 0,
+  tauxchange: 0,
+  valeur: 0
+}
+export interface Journal {
+  id: string
+  type: string;
+  date: Date
+  NumFacture: number;
+  client: Client[];
+  entree: number;
+  sortie: number;
+}
+export const j0: Journal = {
+  id: '',
+  type: '',
+  NumFacture: 0,
+  client: [],
+  date: new Date(),
+  entree: 0,
+  sortie: 0
+}
+
 //************************************************************ */
 //************************************************************ */
 //**********************Fournisseur*************************** */
@@ -447,7 +524,7 @@ export const cf0: CommandeFournisseur = {
   dateCommande: new Date(),
   //@ts-ignore
   montant: "",
-   idFournisseur: "",
+  idFournisseur: "",
 };
 export const getCf0 = (f: Fournisseur): CommandeFournisseur => {
   return {
@@ -617,17 +694,17 @@ export const user0: User = {
   notBefore: 0,
   access: access0,
 };
-export interface UserSession{
-  name:string 
-  email:string
+export interface UserSession {
+  name: string
+  email: string
 }
-export const emptyUser:UserSession={"name":"","email":""}
-export interface SessionToken{
-  user:UserSession
-  expires:Date 
-  accessToken:string
+export const emptyUser: UserSession = { "name": "", "email": "" }
+export interface SessionToken {
+  user: UserSession
+  expires: Date
+  accessToken: string
 }
-export const emptySession:SessionToken={"user":emptyUser,"expires":new Date(),"accessToken":""}
+export const emptySession: SessionToken = { "user": emptyUser, "expires": new Date(), "accessToken": "" }
 export interface Chaine {
   val: string;
 }
@@ -635,30 +712,30 @@ export interface Id {
   id: string;
 }
 export interface ArticleClientJson {
-  content:ArticleClient[]
+  content: ArticleClient[]
 }
 export interface ArticleClient {
-  id:string
-  design:string
-  poid:number
-  prix:number
-  date:Date
-  idClient:string
-  idFamilleArticle:string
-  idFournisseur:string
-  }
-  export const articleClient0:  ArticleClient= {
-    id:"",
-    design:"",
-    poid:0,
-    prix:0,
-    //@ts-ignore
-    date:"",
-    idClient:"",
-    idFamilleArticle:"",
-    idFournisseur:"",
-    }
-export const code0: Id ={
+  id: string
+  design: string
+  poid: number
+  prix: number
+  date: Date
+  idClient: string
+  idFamilleArticle: string
+  idFournisseur: string
+}
+export const articleClient0: ArticleClient = {
+  id: "",
+  design: "",
+  poid: 0,
+  prix: 0,
+  //@ts-ignore
+  date: "",
+  idClient: "",
+  idFamilleArticle: "",
+  idFournisseur: "",
+}
+export const code0: Id = {
   id: ""
 }
 
