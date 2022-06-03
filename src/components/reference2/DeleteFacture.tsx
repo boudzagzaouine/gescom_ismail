@@ -1,18 +1,15 @@
-import { TrashIcon } from "@heroicons/react/outline";
-import { XCircleIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import { useDeleteFactureMutation } from "config/rtk/rtkFacture";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { STYLE_ICON } from "tools/constStyle";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Modal from "widgets/Modal";
 type DeleteFacturePorp = {
-    refetch: () => void
+   
     id: string;
 };
-const DeleteFacture = ({ id, refetch }: DeleteFacturePorp, ref: Ref<void>) => {
+const DeleteFacture = ({ id }: DeleteFacturePorp, ref: Ref<void>) => {
     const [del] = useDeleteFactureMutation();
     const [id0, setId0] = useState(id);
     //@ts-ignore
@@ -53,7 +50,7 @@ const DeleteFacture = ({ id, refetch }: DeleteFacturePorp, ref: Ref<void>) => {
                             onClick={() => {
 
                                 setTimeout(() => {
-                                    refetch()
+                                  
                                     setShowModal(false);
                                 }, 500);
                             }}

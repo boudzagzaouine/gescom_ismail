@@ -1,121 +1,138 @@
-
+import { openClients } from "config/rtk/RtkClient";
 import { useAddFactureMutation, useEditFactureMutation } from "config/rtk/rtkFacture";
-import React, { useEffect, useRef, useState } from "react";
+import { openIncoterms } from "config/rtk/rtkIncoterm";
+import { openPayementModes } from "config/rtk/rtkPayementMode";
+import React, { useState } from "react";
 import {
-    INCOTERM,
-    MODEREGELEMENT,
     REQUEST_EDIT,
-    REQUEST_SAVE,
-    CLIENT
+    REQUEST_SAVE
 } from "tools/consts";
-import { Facture } from 'tools/types';
+import { c0, Client, Facture, Incoterm, incoterm0, PayementMode, payementMode0 } from "tools/types";
 import { Field, Form } from "widgets";
-import Bcyan from "widgets/Bcyan";
-import Bred from "widgets/Bred";
+import Avatar from "widgets/Avatar";
+import Bcancel from "widgets/Bcancel";
+import Bsave from "widgets/Bsave";
+import Bupdate from "widgets/Bupdate";
+import Required from "widgets/Required";
 import Section from "widgets/Section";
-
+import ShowCheckedsField from "widgets/ShowCheckedsField";
+import Title from "widgets/Title";
+import Xclose from "widgets/Xclose";
+import ListFacturation from "../Lists/ListFacturation";
+//14:28
 type FormFactureManagerProp = {
     closed: () => void;
-    Facture: Facture;
+    facture: Facture;
     request: number;
     disable: boolean;
-    imputFocus: any
-};
+    refetch: () => void;
+}; //
 const FormFactureManager = ({
     closed,
-    Facture,
+    facture,
     request,
     disable,
+    refetch,
 }: FormFactureManagerProp) => {
     const [save] = useAddFactureMutation();
     const [edit] = useEditFactureMutation();
+    const tabClients: Client[] = openClients().data.content;
+    const tabIncoterms: Incoterm[] = openIncoterms().data.content;
+    const tabPayementModes: PayementMode[] = openPayementModes().data.content;
+    const clients: string[] = tabClients?.map((d) => d.design);
+    const incoterms = tabIncoterms?.map((d) => d.code);
+    const payementModes = tabPayementModes?.map((d) => d.code);
     const onSubmit =
         request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
     const [disabled, setDisabled] = useState(disable);
-    const text = "nouveau"
-    const text1 = "modifier"
-    const imputFocus = useRef(null)
-    useEffect(() => {
-        /*  @ts-ignore*/
-        imputFocus.current.focus()
-    }, [])
     return (
         <Section>
+            <Xclose close={closed} />
             <div className="float-left w-full text-xs">
-                {/*  @ts-ignore*/}
-                <Form defaultValues={Facture} onSubmit={onSubmit}>
-                    {request == REQUEST_SAVE ? <h1 className="mb-2">{text} facture </h1> : <h1 className="mb-2">{text1} facture </h1>}
-
+                <Form defaultValues={facture} onSubmit={onSubmit}>
+                    <Title msg="facture" id={facture.id} edit={disabled} />
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
-                            {request == REQUEST_EDIT && <Field type="hidden" name="id" />}
-                            <Field ref={imputFocus} label="NumFacture" name="NumFacture" disabled={disabled} />
+                            {request == REQUEST_EDIT && (
+                                <Field type="hidden" name="id" />
+                            )}
+                            <Field label={<Required msg="Numero facture" />} name="NumFacture" disabled={disabled} />
+                            <Field label="Date facture" name="date" disabled={disabled} />
+                            <Field label="email" name="email" disabled={disabled} />
                             <Field
-                                label="client"
+                                label={<Required msg="client" />}
                                 name="client"
-                                options={CLIENT}
+                                options={[c0, ...(clients || [])]}
                                 as="select"
                                 disabled={disabled}
                             />
-                            <Field label="date" name="date" disabled={disabled} />
-                            <Field label="tva" name="tva" disabled={disabled} />
+                            <Field label={<Required msg="TVA" />} name="tva" disabled={disabled} />
                         </div>
-                        <div className="float-right w-1/2">
+                        <div className="float-left w-1/2">
+
                             <Field
-                                label="incoterm"
+                                label={<Required msg="incoterm" />}
                                 name="incoterm"
-                                options={INCOTERM}
+                                options={[incoterm0, ...(incoterms || [])]}
                                 as="select"
                                 disabled={disabled}
+                                optionKeyName="code"
+                                optionLabelName="code"
                             />
                             <Field
-                                label="mode de regelement"
-                                name="moderegelement"
-                                options={MODEREGELEMENT}
+                                label={<Required msg="mode de règlement" />}
+                                name="paymentChoice"
+                                options={[payementMode0, ...(payementModes || [])]}
                                 as="select"
                                 disabled={disabled}
+                                optionKeyName="code"
+                                optionLabelName="code"
                             />
+                         
+                           
                         </div>
+                    </div>
+                    <div className="float-left w-1/6">
+                        <Avatar />
                     </div>
                     <div className="float-left w-full mt-1">
                         {!disabled && (
-                            <Bcyan
-                                className="float-left"
+                            <Bsave
+                                className="float-right b-ajust-r"
                                 onClick={() => {
                                     setTimeout(() => {
                                         closed();
                                     }, 500);
                                 }}
-                            >
-                                sauvegarder
-                            </Bcyan>
-                        )}
-                        {!disabled && request == REQUEST_SAVE && (
-                            <Bcyan className="float-left" type="submit">
-                                sauvegarder && nouveau
-                            </Bcyan>
+                            />
                         )}
                     </div>
                 </Form>
-                <Bred
-                    className="float-right"
-                    onClick={() => {
-                        closed();
-                    }}
-                >
-                    Annuler
-                </Bred>
+                {!disabled && (
+                    <Bcancel
+                        className={
+                            "float-right b-ajust " + (request == REQUEST_SAVE && "b-ajustf")
+                        }
+                        onClick={() => {
+                            if (facture.id != "")
+                                setDisabled(true);
+                            else closed()
+                        }}
+                    />
+                )}
+
                 {disabled && (
-                    <Bcyan
+                    <Bupdate
                         className="float-right"
                         onClick={() => {
                             setDisabled(false);
                         }}
-                    >
-                        modifier
-                    </Bcyan>
+                    />
                 )}
             </div>
+            {facture.id != "" && (
+                <ListFacturation facture={facture} refetch={refetch} />
+            )}
         </Section>
     );
 };

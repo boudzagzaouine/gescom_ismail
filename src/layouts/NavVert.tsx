@@ -32,7 +32,7 @@ const NavVert = ({ updateSel }: NavVertProps) => {
   const route = useRouter();
   const [sous, setSous] = useState(-1);
   const prev = useRef(-1);
-console.log("route = "+JSON.stringify(route))
+  console.log("route = " + JSON.stringify(route))
   useEffect(() => {
     prev.current = sous;
   }, []);
@@ -51,7 +51,7 @@ console.log("route = "+JSON.stringify(route))
       icon: "user-circle",
       text: "Gestion de Clients",
       link: "/manager/client/ClientManager",
-      active: route.pathname == "/manager/client/ClientManager" ||route.pathname == "/manager/client/CommandeClientManager"||route.pathname == "/manager/client/SoldeCommandeClientManager",
+      active: route.pathname == "/manager/client/ClientManager" || route.pathname == "/manager/client/CommandeClientManager" || route.pathname == "/manager/client/SoldeCommandeClientManager",
       sous: [],
     },
     {
@@ -59,7 +59,7 @@ console.log("route = "+JSON.stringify(route))
       icon: "truck",
       text: "Gestion de Fournisseurs",
       link: "/manager/vendor/VendorManager",
-      active: route.pathname == "/manager/vendor/VendorManager"||route.pathname == "/manager/vendor/CommandeVendor"||route.pathname == "/manager/vendor/RawMaterielManager"||route.pathname == "/manager/vendor/CommandeVendorManager",
+      active: route.pathname == "/manager/vendor/VendorManager" || route.pathname == "/manager/vendor/CommandeVendor" || route.pathname == "/manager/vendor/RawMaterielManager" || route.pathname == "/manager/vendor/CommandeVendorManager",
       sous: [],
     },
     /* {id:USER_MANAGER,
@@ -74,26 +74,28 @@ console.log("route = "+JSON.stringify(route))
       icon: "shopping-bag",
       text: "gestion d'achats",
       link: "/manager/purchase/Reception",
-      active: route.pathname == "/manager/purchase/Reception"||route.pathname == "/manager/purchase/RightOfReturn"||route.pathname == "/manager/purchase/StockStatus"||route.pathname == "/manager/purchase/InputOutputHistory",
+      active: route.pathname == "/manager/purchase/Reception" || route.pathname == "/manager/purchase/RightOfReturn" || route.pathname == "/manager/purchase/StockStatus" || route.pathname == "/manager/purchase/InputOutputHistory",
       sous: [],
     },
-     {
+    {
       id: FACTURATION_MANAGER,
       icon: "vente",
       text: "vente et facturation",
       link: "/manager/ventefacturation/Facturation",
-       active: route.pathname == "/manager/ventefacturation/Facturation",
+      active: route.pathname == "/manager/ventefacturation/Facturation" ||
+        route.pathname == "/manager/ventefacturation/AvoirManager/ConversionManager" || route.pathname == "/manager/ventefacturation/ConversionManager"||
+        route.pathname == "/manager/ventefacturation/JournalManager",
       sous: []
     },
-       /*
-    {
-      id: 12,
-      icon: "home",
-      text: "liste des icons",
-      link: "/documentation/ListIcons",
-      active: route.pathname == "/ee",
-      sous: []
-    }, */
+    /*
+ {
+   id: 12,
+   icon: "home",
+   text: "liste des icons",
+   link: "/documentation/ListIcons",
+   active: route.pathname == "/ee",
+   sous: []
+ }, */
     {
       id: TABLE_MANAGER,
       icon: "table",
@@ -195,9 +197,9 @@ console.log("route = "+JSON.stringify(route))
       ],
     },
   ];
-useEffect(()=>{
+  useEffect(() => {
 
-})
+  })
   return (
     <>
       <ul className="nav-horiz bg-[#2B5173]">
@@ -213,10 +215,10 @@ useEffect(()=>{
                 ? "border-l-2 border-white bg-opacity-10 bg-[#000]"
                 : "border-l-0 bg-transparent")
             }
-           /*  onClick={() => {
-              updateSel(item.id);
-              setSous(item.id);
-           }} */
+          /*  onClick={() => {
+             updateSel(item.id);
+             setSous(item.id);
+          }} */
           >
             <Link href={item.link || ""}>
               <a>
