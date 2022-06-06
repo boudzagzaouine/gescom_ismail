@@ -1,13 +1,9 @@
-import { BriefcaseIcon, ClipboardListIcon, TagIcon } from '@heroicons/react/solid';
+import { TagIcon } from '@heroicons/react/solid';
 import { style_icon, style_span } from 'tools/constStyle';
 import { Facture } from 'tools/types';
 import NavTabsHeight from 'widgets/NavTabsHeight';
 import { MenuNavTabs } from 'widgets/TypeWidgets';
 import ListArticles from './ListArticleFacture';
-import ListAvoirsManager from './ListAvoirsManager';
-import ListConversionManager from './ListConversionManager';
-import ListFactureManager from './ListFactureManger';
-import ListJournalManager from './ListJournalManager';
 
 type ListFacturationProp = {
     facture: Facture
