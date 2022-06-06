@@ -41,8 +41,7 @@ const FormFactureManager = ({
     const clients: string[] = tabClients?.map((d) => d.design);
     const incoterms = tabIncoterms?.map((d) => d.code);
     const payementModes = tabPayementModes?.map((d) => d.code);
-    const onSubmit =
-        request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined;
+    const onSubmit = () => { request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined; }
     const [disabled, setDisabled] = useState(disable);
     return (
         <Section>

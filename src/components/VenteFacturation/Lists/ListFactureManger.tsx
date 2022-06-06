@@ -14,9 +14,7 @@ import Section from "widgets/Section";
 import Table from "widgets/Table";
 import FormFactureManager from "../Forms/FormFacturManager";
 
-type ListFactureManagerProp = {
 
-}
 const ListFactureManager = () => {
     const [form, setForm] = useState(false);
     const [facture0, setFacture0] = useState(fa0);
@@ -130,13 +128,14 @@ const ListFactureManager = () => {
                                     <Table.td>
                                         {facture.numColisage}
                                     </Table.td>
+                                    <Table.td>{facture.date}</Table.td>
                                     <Table.td>{facture.Montant}</Table.td>
                                     <Table.td>{facture.reduction}</Table.td>
                                     <Table.td>{facture.tva}</Table.td>
                                     <Table.td>{facture.total}</Table.td>
                                     <Table.td>{facture.payement}</Table.td>
                                     <Table.td>
-                                        <Mitems
+                                        <Mitems 
                                             archive={() => {
                                                 //@ts-ignore
                                                 archive.current(facture.id);
