@@ -15,7 +15,6 @@ import Bsave from "widgets/Bsave";
 import Bupdate from "widgets/Bupdate";
 import Required from "widgets/Required";
 import Section from "widgets/Section";
-import ShowCheckedsField from "widgets/ShowCheckedsField";
 import Title from "widgets/Title";
 import Xclose from "widgets/Xclose";
 import ListFacturation from "../Lists/ListFacturation";

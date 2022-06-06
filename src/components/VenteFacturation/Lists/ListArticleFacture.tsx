@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { af, ArticleFacture, Facture } from "tools/types";
 import Bcyan from "widgets/Bcyan";
 import Table from "widgets/Table";
+import FormArticleFacture from "../Forms/FormArticleFacture";
 type ListArticlesProp = {
     facture: Facture;
     refetchParent: () => void;
@@ -16,7 +17,7 @@ const ListArticles = ({ facture, refetchParent }: ListArticlesProp) => {
     const refetch = commandesOpen.refetch
     const af1: ArticleFacture = af;
     af1.idFacture = facture.id;
-    const refCom = useRef(null);
+    const refArt = useRef(null);
     const refetchAll = () => {
         refetch();
         refetchParent();
@@ -27,11 +28,21 @@ const ListArticles = ({ facture, refetchParent }: ListArticlesProp) => {
                 className="float-left mt-2"
                 onClick={() => {
                     //@ts-ignore
-                    refCom.current(cm0, facture);
+                    refCom.current(af, facture);
                 }}
             >
-                Nouvelle commande
+                Nouvelle Article
             </Bcyan>
+            <FormArticleFacture
+                add={save}
+                edit={edit}
+                article={af1}
+                ref={refArt}
+                facture={facture}
+
+                refetchList={refetchAll}
+                disabled={false}
+            />
             <Table
                 className="tab-list float-left w-full mt-2"
                 thead={
