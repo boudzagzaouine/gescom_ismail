@@ -1,7 +1,7 @@
 import ArchiveFacture from "components/reference2/ArchiveFacture";
 import DeleteFacture from "components/reference2/DeleteFacture";
 import RestoreFacture from "components/reference2/RestoreFacture";
-import { OpenFactureProp, openFactures } from "config/rtk/rtkFacture";
+import { OpenFactureProp, openFactures, openPaginationFactures } from "config/rtk/rtkFacture";
 import React, { useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { fa0, Facture } from "tools/types";
@@ -25,7 +25,7 @@ const ListFactureManager = () => {
         refetch();
     };
     //openPaginationFactures =(page:number):OpenFactureProp
-    const openfactures: OpenFactureProp = openFactures();
+    const openfactures: OpenFactureProp = openPaginationFactures(page);
     const factures: Facture[] = openfactures.data.content;
     const refetch = openfactures.refetch;
     const [disabled, setDisabled] = useState(true);
@@ -119,15 +119,9 @@ const ListFactureManager = () => {
                             factures?.map((facture) => (
                                 //   data?.map((facture) => (
                                 <tr key={facture.id}>
-                                    <Table.td>
-                                        {facture.NumFacture}
-                                    </Table.td>
-                                    <Table.td>
-                                        {facture.client}
-                                    </Table.td>
-                                    <Table.td>
-                                        {facture.numColisage}
-                                    </Table.td>
+                                    <Table.td>  {facture.NumFacture}   </Table.td>
+                                    <Table.td>  {facture.client}</Table.td>
+                                    <Table.td> {facture.numColisage}</Table.td>
                                     <Table.td>{facture.date}</Table.td>
                                     <Table.td>{facture.Montant}</Table.td>
                                     <Table.td>{facture.reduction}</Table.td>
@@ -135,7 +129,7 @@ const ListFactureManager = () => {
                                     <Table.td>{facture.total}</Table.td>
                                     <Table.td>{facture.payement}</Table.td>
                                     <Table.td>
-                                        <Mitems 
+                                        <Mitems
                                             archive={() => {
                                                 //@ts-ignore
                                                 archive.current(facture.id);

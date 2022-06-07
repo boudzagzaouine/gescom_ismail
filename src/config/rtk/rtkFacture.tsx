@@ -108,3 +108,11 @@ export const openFactures = (): OpenFactureProp => {
     const out: OpenFactureProp = { data, refetch, save, edit }
     return out;
 }
+export const openPaginationFactures = (page: number): OpenFactureProp => {
+    const { data = [], refetch } = usePaginationFacturesQuery(page);
+    const [save] = useAddFactureMutation();
+    const [edit] = useEditFactureMutation();
+    //@ts-ignore
+    const out: OpenFactureProp = { data, refetch, save, edit };
+    return out;
+};
