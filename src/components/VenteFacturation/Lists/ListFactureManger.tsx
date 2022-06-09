@@ -129,7 +129,7 @@ const ListFactureManager = () => {
                                     <Table.td>{facture.total}</Table.td>
                                     <Table.td>{facture.payement}</Table.td>
                                     <Table.td>
-                                        <Mitems
+                                        <Mitems 
                                             archive={() => {
                                                 //@ts-ignore
                                                 archive.current(facture.id);

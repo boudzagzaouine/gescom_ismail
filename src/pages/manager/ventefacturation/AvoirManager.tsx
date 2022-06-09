@@ -1,8 +1,9 @@
+import ListAvoirManager from 'components/VenteFacturation/Lists/ListAvoirsManager'
 import React from 'react'
 
 function AvoirManager() {
   return (
-    <div>AvoirManager</div>
+    <ListAvoirManager/>
   )
 }
 

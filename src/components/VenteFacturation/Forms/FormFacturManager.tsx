@@ -15,7 +15,6 @@ import Bsave from "widgets/Bsave";
 import Bupdate from "widgets/Bupdate";
 import Required from "widgets/Required";
 import Section from "widgets/Section";
-import Title from "widgets/Title";
 import Xclose from "widgets/Xclose";
 import ListFacturation from "../Lists/ListFacturation";
 //14:28
@@ -48,7 +47,7 @@ const FormFactureManager = ({
             <Xclose close={closed} />
             <div className="float-left w-full text-xs">
                 <Form defaultValues={facture} onSubmit={onSubmit}>
-                    <Title msg="facture" id={facture.id} edit={disabled} />
+                    <h1 className="mb-4">Nouveau Facture</h1>
                     <div className="float-left w-5/6">
                         <div className="float-left w-1/2">
                             {request == REQUEST_EDIT && (
@@ -86,8 +85,8 @@ const FormFactureManager = ({
                                 optionKeyName="code"
                                 optionLabelName="code"
                             />
-                         
-                           
+
+
                         </div>
                     </div>
                     <div className="float-left w-1/6">
