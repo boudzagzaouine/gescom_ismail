@@ -1,5 +1,4 @@
 import { openClients } from "config/rtk/RtkClient";
-import { useAddFactureMutation, useEditFactureMutation } from "config/rtk/rtkFacture";
 import { openIncoterms } from "config/rtk/rtkIncoterm";
 import { openPayementModes } from "config/rtk/rtkPayementMode";
 import React, { useState } from "react";
@@ -11,12 +10,14 @@ import { c0, Client, Facture, Incoterm, incoterm0, PayementMode, payementMode0 }
 import { Field, Form } from "widgets";
 import Avatar from "widgets/Avatar";
 import Bcancel from "widgets/Bcancel";
+import Bmarquercomepayé from "widgets/Bmarquercomepayé";
 import Bsave from "widgets/Bsave";
 import Bupdate from "widgets/Bupdate";
 import Required from "widgets/Required";
 import Section from "widgets/Section";
 import Xclose from "widgets/Xclose";
 import ListFacturation from "../Lists/ListFacturation";
+import { useAddFactureMutation, useEditFactureMutation } from "../rtk/rtkFacture";
 //14:28
 type FormFactureManagerProp = {
     closed: () => void;
@@ -72,18 +73,16 @@ const FormFactureManager = ({
                                 name="incoterm"
                                 options={[incoterm0, ...(incoterms || [])]}
                                 as="select"
+
                                 disabled={disabled}
-                                optionKeyName="code"
-                                optionLabelName="code"
                             />
                             <Field
                                 label={<Required msg="mode de règlement" />}
                                 name="paymentChoice"
                                 options={[payementMode0, ...(payementModes || [])]}
                                 as="select"
+
                                 disabled={disabled}
-                                optionKeyName="code"
-                                optionLabelName="code"
                             />
 
 
@@ -119,12 +118,24 @@ const FormFactureManager = ({
                 )}
 
                 {disabled && (
-                    <Bupdate
-                        className="float-right"
-                        onClick={() => {
-                            setDisabled(false);
-                        }}
-                    />
+                    <div >
+                        <div className="">
+                            <Bupdate
+                                className="float-right"
+                                onClick={() => {
+                                    setDisabled(false);
+                                }}
+                            />
+                        </div>
+                        <div className="">
+                            <Bmarquercomepayé
+                                className="float-right"
+                                onClick={() => {
+
+                                }}
+                            />
+                        </div>
+                    </div>
                 )}
             </div>
             {facture.id != "" && (

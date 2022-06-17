@@ -1,27 +1,20 @@
-import { DocumentAddIcon } from "@heroicons/react/solid";
+import ArchiveCommand from "components/manager/client/ArchiveCommand";
+import DeleteCommand from "components/manager/client/DeleteCommand";
 import { OpenClientProp, openClients } from "config/rtk/RtkClient";
 import {
-  OpenCommandeProp,
-  openCommandes,
-  openCommandesPagination,
-  useFetchCommandesQuery,
-  usePaginationCommandesQuery,
+  OpenCommandeProp, openCommandesPagination
 } from "config/rtk/RtkCommande";
+//@ts-ignore
+import dateFormat from "dateformat";
 import React, { useRef, useState } from "react";
 import { getClient } from "tools/Methodes";
-import { c0, Client, ClientJson, cm0, Commande } from "tools/types";
+import { c0, Client, cm0, Commande } from "tools/types";
 import Bcyan from "widgets/Bcyan";
-import Bedit from "widgets/Bedit";
+import Mitems from "widgets/Mitems";
 import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
-import { ListClientsProps } from "widgets/TypeWidgets";
 import FormCommande from "./FormCommande";
-//@ts-ignore
-import dateFormat from "dateformat";
-import Mitems from "widgets/Mitems";
-import DeleteCommand from "components/manager/client/DeleteCommand";
-import ArchiveCommand from "components/manager/client/ArchiveCommand";
 const ListAllCommandes = () => {
   const [page, setPage] = useState(0);
   const loadPage = (p: number) => {

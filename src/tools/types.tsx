@@ -404,24 +404,26 @@ export interface Facture {
   Montant: number
   payementChoice: String
   incoterme: String
-  reduction:number
+  reduction: number
   tva: number
   total: number
   payement: string
 }
-export interface ArticleFacture{
-  id: string
+export interface ArticleFacture {
+  id: string,
+  codeArticle: number
   deignation: string
   quantité: number
   idFacture: string
-  prixUnitaire:number
+  prixUnitaire: number
 }
-export const af: ArticleFacture={
+export const af: ArticleFacture = {
   id: '',
-  idFacture:'',
+  codeArticle: 0,
+  idFacture: '',
   deignation: '',
-  quantité:0,
-  prixUnitaire:0
+  quantité: 0,
+  prixUnitaire: 0
 }
 export const fa0: Facture = {
   id: '',
@@ -430,9 +432,9 @@ export const fa0: Facture = {
   date: new Date(),
   numColisage: 0,
   payementChoice: "",
-  incoterme:"",
+  incoterme: "",
   Montant: 0,
-  reduction:0,
+  reduction: 0,
   tva: 0,
   total: 0,
   payement: ''

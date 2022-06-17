@@ -1,5 +1,5 @@
 
-import { useAddAvoirMutation, useEditAvoirMutation } from "config/rtk/rtkAvoir";
+import { useAddAvoirMutation, useEditAvoirMutation } from "components/VenteFacturation/rtk/rtkAvoir";
 import { openClients } from "config/rtk/RtkClient";
 import React, { useState } from "react";
 import {
@@ -14,6 +14,7 @@ import Bsave from "widgets/Bsave";
 import Bupdate from "widgets/Bupdate";
 import Section from "widgets/Section";
 import Xclose from "widgets/Xclose";
+import ListFacturation from "../Lists/ListFacturation";
 type FormAvoirManagerProp = {
     closed: () => void;
     avoir: Avoir;
@@ -99,7 +100,9 @@ const FormAvoirManager = ({
                     />
                 )}
             </div>
-
+            {avoir.id != "" && (
+                <ListFacturation facture={facture} refetch={refetch} />
+            )}
         </Section>
     );
 };

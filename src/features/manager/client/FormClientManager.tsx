@@ -35,7 +35,8 @@ const FormClientManager = ({
 }: FormClientManagerProp) => {
   const [save] = useAddClientMutation();
   const [edit] = useEditClientMutation();
-  const tabDevises: Devise[] = openDevises().data.content;
+  const [page, setPage] = useState(0);
+  const tabDevises: Devise[] = openDevises(page).data.content;
   const devises: string[] = tabDevises?.map((d) => d.symbole);
   const tabIncoterms: Incoterm[] = openIncoterms().data.content;
   const tabPayementModes: PayementMode[] = openPayementModes().data.content;
@@ -62,7 +63,7 @@ const FormClientManager = ({
               <Field
                 label="device"
                 name="device"
-                options={[devise0,...(devises||[])]}
+                options={[devise0, ...(devises || [])]}
                 as="select"
                 disabled={disabled}
               />
@@ -77,20 +78,20 @@ const FormClientManager = ({
               <Field
                 label="Mode de payment"
                 name="paymentChoice"
-                options={[payementMode0,...(payementModes||[])]}
+                options={[payementMode0, ...(payementModes || [])]}
                 as="select"
                 disabled={disabled}
-                optionKeyName = "code"
-                optionLabelName = "code"
+                optionKeyName="code"
+                optionLabelName="code"
               />
               <Field
                 label="incoterm"
                 name="incoterm"
-                options={[incoterm0,...(incoterms||[])]}
+                options={[incoterm0, ...(incoterms || [])]}
                 as="select"
                 disabled={disabled}
-                optionKeyName = "code"
-                optionLabelName = "code"
+                optionKeyName="code"
+                optionLabelName="code"
               />
               <Field
                 label="adresse de facturation"
@@ -117,7 +118,7 @@ const FormClientManager = ({
                 }}
               />
             )}
-         </div>
+          </div>
         </Form>
         {!disabled && (
           <Bcancel
@@ -125,8 +126,8 @@ const FormClientManager = ({
               "float-right b-ajust " + (request == REQUEST_SAVE && "b-ajustf")
             }
             onClick={() => {
-              if(client.id!="")
-              setDisabled(true);
+              if (client.id != "")
+                setDisabled(true);
               else closed()
             }}
           />

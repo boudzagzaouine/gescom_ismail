@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useRestoreFactureMutation } from "config/rtk/rtkFacture";
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
 import Modal from "widgets/Modal";
+import { useRestoreFactureMutation } from "../rtk/rtkFacture";
 type RestoreFacturePorp = {
     id: string;
 };

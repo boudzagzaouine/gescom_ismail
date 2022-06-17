@@ -1,3 +1,4 @@
+import { crudFacture } from './../components/VenteFacturation/rtk/rtkFacture';
 import { createOffline } from "@redux-offline/redux-offline";
 import offlineConfig from "@redux-offline/redux-offline/lib/defaults";
 import {
@@ -17,14 +18,13 @@ import { crudArticle } from "./rtk/rtkArticle";
 import { crudArticleClient } from "./rtk/RtkArticleClient";
 import { crudArticleCommande } from "./rtk/RtkArticleCommande";
 import { crudArticleFacture } from './rtk/rtkArticleFacture';
-import { crudAvoir } from './rtk/rtkAvoir';
+import { crudAvoir } from '../components/VenteFacturation/rtk/rtkAvoir';
 import { crudBureauDouane } from "./rtk/rtkBureauDouane";
 import { crudClient } from "./rtk/RtkClient";
 import { crudCommande } from "./rtk/RtkCommande";
 import { crudDeclarant } from "./rtk/rtkDeclarant";
 import { crudDevise } from "./rtk/rtkDevise";
 import { crudDocument } from "./rtk/rtkDocument";
-import { crudFacture } from './rtk/rtkFacture';
 import { crudFournisseur } from "./rtk/rtkFournisseur";
 import { crudIncoterm } from "./rtk/rtkIncoterm";
 import { crudPayementMode } from "./rtk/rtkPayementMode";

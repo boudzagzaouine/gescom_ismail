@@ -44,7 +44,7 @@ const FormArticleFacture = ({ article, add, edit, refetchList, facture, disabled
 
                 <div >
 
-                    <Field disabled={true} label={<Required msg="Facture" />} value={facture0?.id} />
+                    <Field label={<Required msg="code article"/>}  name="codeArticle" disabled={disabled} />
                     <Field label={<Required msg="designation" />} name="designation" disabled={disabled} />
                     <Field label={<Required msg="quantité" />} name="quantité" disabled={disabled} />
                     <Field label={<Required msg="prix unitaire" />} name="prixUnitaire" disabled={disabled} />

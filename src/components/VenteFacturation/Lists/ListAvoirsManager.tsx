@@ -1,8 +1,6 @@
 
-import ArchiveAvoir from "config/rtk/ArchiveAvoir";
-import DeleteAvoir from "config/rtk/DeleteAvoir";
-import RestoreAvoir from "config/rtk/RestoreAvoir";
-import { OpenAvoirProp, openPaginationAvoirs } from "config/rtk/rtkAvoir";
+import ArchiveAvoir from "components/VenteFacturation/methods/ArchiveAvoir";
+import { OpenAvoirProp, openPaginationAvoirs } from "components/VenteFacturation/rtk/rtkAvoir";
 import React, { useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { a0, Avoir } from "tools/types";
@@ -14,6 +12,8 @@ import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
 import FormAvoirManager from "../Forms/FormAvoirManager";
+import DeleteAvoir from "../methods/DeleteAvoir";
+import RestoreAvoir from "../methods/RestoreAvoir";
 
 const ListAvoirManager = () => {
   const [form, setForm] = useState(false);

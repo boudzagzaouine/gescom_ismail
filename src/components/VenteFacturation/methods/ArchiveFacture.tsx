@@ -1,21 +1,22 @@
-import axios from "axios";
-import { useDeleteFactureMutation } from "config/rtk/rtkFacture";
+
 import React, { forwardRef, Ref, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { setTimeout } from "timers";
 import Bcyan from "widgets/Bcyan";
 import Bred from "widgets/Bred";
-import Modal from "widgets/Modal";
-type DeleteFacturePorp = {
-   
+import Modal from 'widgets/Modal';
+import { useArchiveFactureMutation } from "../rtk/rtkFacture";
+type ArchiveFacturePorp = {
     id: string;
 };
-const DeleteFacture = ({ id }: DeleteFacturePorp, ref: Ref<void>) => {
-    const [del] = useDeleteFactureMutation();
+const ArchiveFacture = ({ id }: ArchiveFacturePorp, ref: Ref<void>) => {
     const [id0, setId0] = useState(id);
     //@ts-ignore
     const { register, handleSubmit } = useForm<string>({
         defaultValues: { id0 },
     });
+    const [archive] = useArchiveFactureMutation();
+    const [showModal, setShowModal] = React.useState(false);
     const openModal = (i: string) => {
         setId0(i);
         setShowModal(true);
@@ -27,19 +28,16 @@ const DeleteFacture = ({ id }: DeleteFacturePorp, ref: Ref<void>) => {
         //@ts-ignore
         ref.current = openModal;
     });
-    const [showModal, setShowModal] = React.useState(false);
-    const delTemp = () => {
-        axios.delete("http://localhost:1000/api/v1/factures/" + id0).then(() => { });
-    };
+
     return (
         <>
-            <Modal title={"suppression"} show={showModal} format={5} close={close}>
+            <Modal title={"archivage"} show={showModal} format={5} close={close}  >
                 <div>
-                    <h2>suppression de document num: {id0}</h2>
+                    <h2>archivage du Facture num: {id0}</h2>
                     <form
                         onSubmit={
                             //@ts-ignore
-                            handleSubmit(delTemp)
+                            handleSubmit(archive)
                         }
                     >
                         {" "}
@@ -48,28 +46,26 @@ const DeleteFacture = ({ id }: DeleteFacturePorp, ref: Ref<void>) => {
                             type="submit"
                             className="mt-2 float-right"
                             onClick={() => {
-
                                 setTimeout(() => {
-                                  
                                     setShowModal(false);
                                 }, 500);
                             }}
                         >
-                            Supprimer
+                            Archiver
                         </Bcyan>
-                        <Bred
-                            className="mt-2 float-right"
-                            onClick={() => {
-                                setShowModal(false);
-                            }}
-                        >
-                            Annuler
-                        </Bred>
                     </form>
+                    <Bred
+                        className="mt-2 float-right"
+                        onClick={() => {
+                            setShowModal(false);
+                        }}
+                    >
+                        Annuler
+                    </Bred>
                 </div>
             </Modal>
         </>
     );
 };
 
-export default forwardRef(DeleteFacture);
+export default forwardRef(ArchiveFacture);

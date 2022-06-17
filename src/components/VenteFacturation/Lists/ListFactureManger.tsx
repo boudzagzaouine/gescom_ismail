@@ -1,7 +1,4 @@
-import ArchiveFacture from "components/reference2/ArchiveFacture";
-import DeleteFacture from "components/reference2/DeleteFacture";
-import RestoreFacture from "components/reference2/RestoreFacture";
-import { OpenFactureProp, openFactures, openPaginationFactures } from "config/rtk/rtkFacture";
+
 import React, { useEffect, useRef, useState } from "react";
 import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
 import { fa0, Facture } from "tools/types";
@@ -13,6 +10,10 @@ import Pagin from "widgets/Pagin";
 import Section from "widgets/Section";
 import Table from "widgets/Table";
 import FormFactureManager from "../Forms/FormFacturManager";
+import ArchiveFacture from "../methods/ArchiveFacture";
+import DeleteFacture from "../methods/DeleteFacture";
+import RestoreFacture from "../methods/RestoreFacture";
+import { OpenFactureProp, openPaginationFactures } from "../rtk/rtkFacture";
 
 
 const ListFactureManager = () => {

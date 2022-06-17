@@ -28,7 +28,7 @@ const ListArticles = ({ facture, refetchParent }: ListArticlesProp) => {
                 className="float-left mt-2"
                 onClick={() => {
                     //@ts-ignore
-                    refCom.current(af, facture);
+                    refArt.current(af, facture);
                 }}
             >
                 Nouvelle Article
