@@ -1,154 +1,148 @@
-
-import ArchiveAvoir from "components/VenteFacturation/methods/ArchiveAvoir";
-import { OpenAvoirProp, openPaginationAvoirs } from "components/VenteFacturation/rtk/rtkAvoir";
-import React, { useEffect, useRef, useState } from "react";
-import { REQUEST_EDIT, REQUEST_SAVE } from "tools/consts";
-import { a0, Avoir } from "tools/types";
-import { Button } from "widgets";
-import Bcyan from "widgets/Bcyan";
-import Icon from "widgets/Icon";
-import Mitems from "widgets/Mitems";
-import Pagin from "widgets/Pagin";
+import { openClients } from "config/rtk/RtkClient";
+import { openIncoterms } from "config/rtk/rtkIncoterm";
+import { openPayementModes } from "config/rtk/rtkPayementMode";
+import React, { useState } from "react";
+import {
+  REQUEST_EDIT,
+  REQUEST_SAVE
+} from "tools/consts";
+import { c0, Client, Facture, Incoterm, incoterm0, PayementMode, payementMode0 } from "tools/types";
+import { Field, Form } from "widgets";
+import Avatar from "widgets/Avatar";
+import Bcancel from "widgets/Bcancel";
+import Bmarquercomepayé from "widgets/Bmarquercomepayé";
+import Bsave from "widgets/Bsave";
+import Bupdate from "widgets/Bupdate";
+import Required from "widgets/Required";
 import Section from "widgets/Section";
-import Table from "widgets/Table";
-import FormAvoirManager from "../Forms/FormAvoirManager";
-import DeleteAvoir from "../methods/DeleteAvoir";
-import RestoreAvoir from "../methods/RestoreAvoir";
-
-const ListAvoirManager = () => {
-  const [form, setForm] = useState(false);
-  const [avoir0, setAvoir0] = useState(a0);
-  const [request0, setRequest0] = useState(REQUEST_SAVE);
-  const [page, setPage] = useState(0);
-  const loadPage = (p: number) => {
-    setPage(p);
-    refetch();
-  };
-  //openPaginationAvoirs =(page:number):OpenAvoirProp
-  const openAvoirs: OpenAvoirProp = openPaginationAvoirs(page);
-  const avoirs: Avoir[] = openAvoirs.data.content;
-  const refetch = openAvoirs.refetch;
-  const [disabled, setDisabled] = useState(true);
-  const del = useRef(null);
-  const archive = useRef(null);
-  const restore = useRef(null);
-
-  const showFormulaire = (avoir: Avoir) => {
-    setAvoir0(avoir);
-    setForm(true);
-    setRequest0(REQUEST_EDIT);
-  };
-  const FormAsAdd = () => {
-    setDisabled(false);
-    setAvoir0(a0);
-    setForm(true);
-    setRequest0(REQUEST_SAVE);
-  };
-  const FormAsEdit = (avoir: Avoir) => {
-    setDisabled(true);
-    showFormulaire(avoir);
-  };
-  const FormAsUpdate = (avoir: Avoir) => {
-    setDisabled(false);
-    showFormulaire(avoir);
-  };
-  useEffect(() => {
-
-  })
-
+import Xclose from "widgets/Xclose";
+import ListFacturation from "../Lists/ListFacturation";
+import { useAddFactureMutation, useEditFactureMutation } from "../rtk/rtkFacture";
+//14:28
+type FormFactureManagerProp = {
+  closed: () => void;
+  facture: Facture;
+  request: number;
+  disable: boolean;
+  refetch: () => void;
+}; //
+const FormFactureManager = ({
+  closed,
+  facture,
+  request,
+  disable,
+  refetch,
+}: FormFactureManagerProp) => {
+  const [save] = useAddFactureMutation();
+  const [edit] = useEditFactureMutation();
+  const tabClients: Client[] = openClients().data.content;
+  const tabIncoterms: Incoterm[] = openIncoterms().data.content;
+  const tabPayementModes: PayementMode[] = openPayementModes().data.content;
+  const clients: string[] = tabClients?.map((d) => d.design);
+  const incoterms = tabIncoterms?.map((d) => d.code);
+  const payementModes = tabPayementModes?.map((d) => d.code);
+  const onSubmit = () => { request == REQUEST_SAVE ? save : request == REQUEST_EDIT ? edit : undefined; }
+  const [disabled, setDisabled] = useState(disable);
   return (
-    <>
-      {form && (
-        <FormAvoirManager
-          request={request0}
-          avoir={avoir0}
-          closed={() => {
-            setForm(false);
-            setRequest0(REQUEST_SAVE);
-            refetch();
-          }}
-          refetch={refetch}
-          disable={disabled}
-        />
-      )}
-      {!form && (
-        <Section>
-          <DeleteAvoir id={""} ref={del} />
-          <ArchiveAvoir id={""} ref={archive} />
-          <RestoreAvoir id={""} ref={restore} />
-          <div className="float-left w-full">
-            <Bcyan
-              className="float-left"
-              onClick={() => {
-                //setAvoir0(a0);
-                //setForm(true);
-                FormAsAdd();
-              }}
-            >
-              Nouveau Avoir
-            </Bcyan>
-            <div className="float-right">
-              <Button className="bg-white float-left border border-[#ddd] border-r-0 p-3 rounded-l-lg">
-                <Icon i="search" cl="" />
-              </Button>
-              <input
-                type="text"
-                className="py-3 border outline-[#ddd] border-[#ddd] float-left border-l-0 rounded-r-lg w-96"
+    <Section>
+      <Xclose close={closed} />
+      <div className="float-left w-full text-xs">
+        <Form defaultValues={facture} onSubmit={onSubmit}>
+          <h1 className="mb-4">Nouveau Facture</h1>
+          <div className="float-left w-5/6">
+            <div className="float-left w-1/2">
+              {request == REQUEST_EDIT && (
+                <Field type="hidden" name="id" />
+              )}
+              <Field label={<Required msg="Numero facture" />} name="NumFacture" disabled={disabled} />
+              <Field label="Date facture" name="date" disabled={disabled} />
+              <Field label="email" name="email" disabled={disabled} />
+              <Field
+                label={<Required msg="client" />}
+                name="client"
+                options={[c0, ...(clients || [])]}
+                as="select"
+                disabled={disabled}
+              />
+              <Field label={<Required msg="TVA" />} name="tva" disabled={disabled} />
+            </div>
+            <div className="float-left w-1/2">
+
+              <Field
+                label={<Required msg="incoterm" />}
+                name="incoterm"
+                options={[incoterm0, ...(incoterms || [])]}
+                as="select"
+
+                disabled={disabled}
+              />
+              <Field
+                label={<Required msg="mode de règlement" />}
+                name="paymentChoice"
+                options={[payementMode0, ...(payementModes || [])]}
+                as="select"
+
+                disabled={disabled}
+              />
+
+
+            </div>
+          </div>
+          <div className="float-left w-1/6">
+            <Avatar />
+          </div>
+          <div className="float-left w-full mt-1">
+            {!disabled && (
+              <Bsave
+                className="float-right b-ajust-r"
+                onClick={() => {
+                  setTimeout(() => {
+                    closed();
+                  }, 500);
+                }}
+              />
+            )}
+          </div>
+        </Form>
+        {!disabled && (
+          <Bcancel
+            className={
+              "float-right b-ajust " + (request == REQUEST_SAVE && "b-ajustf")
+            }
+            onClick={() => {
+              if (facture.id != "")
+                setDisabled(true);
+              else closed()
+            }}
+          />
+        )}
+
+        {disabled && (
+          <div >
+            <div className="">
+              <Bupdate
+                className="float-right"
+                onClick={() => {
+                  setDisabled(false);
+                }}
+              />
+            </div>
+            <div className="">
+              <Bmarquercomepayé
+                className="float-right"
+                onClick={() => {
+
+                }}
               />
             </div>
           </div>
-          <Table
-            className="tab-list float-left w-full mt-8"
-            thead={
-              <tr>
-                <Table.th>N°</Table.th>
-                <Table.th>Client</Table.th>
-                <Table.th>N° Facture</Table.th>
-                <Table.th>Date</Table.th>
-                <Table.th>Montant</Table.th>
-                <Table.th></Table.th>
-              </tr>
-            }
-          >
-            {
-              //@ts-ignore
-              avoirs?.map((avoir) => (
-                //   data?.map((avoir) => (
-                <tr key={avoir.id}>
-                  <Table.td>{avoir.num}</Table.td>
-                  <Table.td>{avoir.client}</Table.td>
-                  <Table.td>{avoir.NumFacture}</Table.td>
-                  <Table.td>{avoir.date}</Table.td>
-                  <Table.td>{avoir.Montant}</Table.td>
-                  <Table.td>
-                    <Mitems
-                      archive={() => {
-                        //@ts-ignore
-                        archive.current(avoir.id);
-                      }}
-                      del={() => {
-                        //@ts-ignore
-                        del.current(avoir.id);
-                      }}
-                      edit={() => {
-                        FormAsEdit(avoir);
-                      }}
-                      obj={avoir}
-                      update={() => {
-                        FormAsUpdate(avoir);
-                      }}
-                    />
-                  </Table.td>
-                </tr>
-              ))
-            }
-          </Table>
-
-          <Pagin load={loadPage} visible={avoirs?.length > 0} max={avoirs?.length} />
-        </Section>
+        )}
+      </div>
+      {facture.id != "" && (
+        <ListFacturation facture={facture} refetch={refetch} />
       )}
-    </>
+    </Section>
   );
 };
 
-export default ListAvoirManager;
+export default FormFactureManager;
